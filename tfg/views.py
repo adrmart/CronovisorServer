@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 
 class StreetViewSet(ModelViewSet):
-	queryset = Street.objects.all()
+	queryset = Street.objects.all().order_by('name_es')
 	serializer_class = StreetSerializer
 
 class MarkerViewSet(ModelViewSet):
@@ -21,6 +21,7 @@ class ImageFromMarker(ListAPIView):
 	def get_queryset(self):
         	marker = self.kwargs['marker']
         	return Image.objects.filter(id_marker=marker)
+
 class ImagesFromStreet(ListAPIView):
 	serializer_class = ImageSerializer
 	def get_queryset(self):
